@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        section {
+            padding: 20px;
+        }
+        .news, .services {
+            margin-bottom: 30px;
+        }
+        .item {
+            margin-bottom: 10px;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Tech Comp</h1>
+    </header>
+    <section>
+        <h2>Latest News</h2>
+        <div class="news">
+            {% for news in newsData %}
+                <div class="item">
+                    <h3>{{ news.title }}</h3>
+                    <p>{{ news.description|truncatewords:20 }}</p>
+                    <a href="{% url 'news_detail' news.slug %}">Read more</a>
+                </div>
+            {% empty %}
+                <p>No news available at the moment.</p>
+            {% endfor %}
+        </div>
+
+        <h2>Our Services</h2>
+        <div class="services">
+            {% for service in services %}
+                <div class="item">
+                    <h3>{{ service.service_title }}</h3>
+                    <p>{{ service.service_description|truncatewords:20 }}</p>
+                </div>
+            {% empty %}
+                <p>No services available at the moment.</p>
+            {% endfor %}
+        </div>
+    </section>
+    <footer>
+        <p>&copy; {{ current_year }} Tech Comp. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

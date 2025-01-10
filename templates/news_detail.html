@@ -1,0 +1,43 @@
+{% load  static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the News Site</h1>
+        <p>Current Year: {{ current_year }}</p>
+    </header>
+
+    <section class="news">
+        <h2>Latest News</h2>
+        {% for news in news_list %}
+            <div class="news-item">
+                <h3><a href="{% url 'news_detail' news.slug %}">{{ news.news_title }}</a></h3>
+                <p>{{ news.news_desc }}</p>
+                {% if news.news_image %}
+                    <img src="{{ news.news_image.url }}" alt="{{ news.news_title }}">
+                {% endif %}
+            </div>
+        {% endfor %}
+    </section>
+
+    <section class="services">
+        <h2>Our Services</h2>
+        {% for service in services %}
+            <div class="service-item">
+                <h3>{{ service.name }}</h3>  <!-- Assuming you have a 'name' field in the Service model -->
+                <p>{{ service.description }}</p>  <!-- Assuming a description field -->
+            </div>
+        {% endfor %}
+    </section>
+
+    <footer>
+        <p>&copy; {{ current_year }} Your Company</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,70 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Our Services</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Our Services</h1>
+    </header>
+
+    <!-- Search Form -->
+    <form method="GET" action="">
+        <input type="text" name="servicename" placeholder="Search Services" value="{{ search_term }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Services Content -->
+    <div class="services-container">
+        {% for service in page_obj %}
+            <div class="service-item">
+                <h3>{{ service.service_title }}</h3>
+                <p>{{ service.service_desc }}</p>
+                <p>🔧 {{ service.service_icon }}</p>
+            </div>
+        {% empty %}
+            <p>No services found.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <nav>
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li><a href="?page=1&servicename={{ search_term }}">First</a></li>
+                <li><a href="?page={{ page_obj.previous_page_number }}&servicename={{ search_term }}">Previous</a></li>
+            {% else %}
+                <li class="disabled"><span>First</span></li>
+                <li class="disabled"><span>Previous</span></li>
+            {% endif %}
+
+            {% for page_num in page_obj.paginator.page_range %}
+                {% if page_num == page_obj.number %}
+                    <li class="active"><span>{{ page_num }}</span></li>
+                {% else %}
+                    <li><a href="?page={{ page_num }}&servicename={{ search_term }}">{{ page_num }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}&servicename={{ search_term }}">Next</a></li>
+                <li><a href="?page={{ page_obj.paginator.num_pages }}&servicename={{ search_term }}">Last</a></li>
+            {% else %}
+                <li class="disabled"><span>Next</span></li>
+                <li class="disabled"><span>Last</span></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Your Company. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

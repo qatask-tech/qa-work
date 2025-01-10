@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+
+
+
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+<!-- Welcome Section -->
+<h1>Welcome to Our Home Page</h1>
+
+<!-- Navigation Menu -->
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+<nav>
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'services' %}">Services</a></li>
+        <li><a href="{% url 'course' %}">Course</a></li>
+        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+        <li><a href="{% url 'aboutus' %}">About Us</a></li>
+    </ul>
+</nav>
+
+<!-- Marquee Section -->
+<div class="marquee-container">
+    <div class="marquee-content">
+        {% for news in newsData %}
+            <a href="{% url 'news_detail' news.pk %}">{{ news.title }}</a>
+        {% empty %}
+            <span>No news available at the moment.</span>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="features">
+    {% for service in services %}
+    <div class="feature-item">
+        <i class="{{ service.service_icon }}"></i>
+        <h2>{{ service.service_title }}</h2>
+        <p>{{ service.service_desc|safe }}</p>
+    </div>
+    {% empty %}
+    <p>No services available at the moment.</p>
+    {% endfor %}
+</div>
+
+<!-- News Section -->
+<h2>News</h2>
+<ul>
+    {% for news in newsData %}
+        <li>{{ news.title }}</li>
+    {% empty %}
+        <li>No news available.</li>
+    {% endfor %}
+</ul>
+
+<!-- Services Section -->
+<h2>Services</h2>
+<ul>
+    {% for service in services %}
+        <li>{{ service.name }}</li>
+    {% empty %}
+        <li>No services available.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

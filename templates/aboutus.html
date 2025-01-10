@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header>
+    <h1>About Us</h1>
+    <nav>
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'aboutus' %}">About Us</a>
+        <a href="{% url 'services' %}">Services</a>
+        <a href="{% url 'contact' %}">Contact</a>
+    </nav>
+</header>
+
+<div class="container">
+
+    <h2>Who We Are</h2>
+    <p>Adventure Master is dedicated to providing the best travel experiences.</p>
+</div>
+
+{% if result %}
+<div class="result-container">
+    <p><strong>Result:</strong> {{ result }}</p>
+</div>
+{% endif %}
+
+<footer>
+    <p>&copy; 2024 Adventure Master. All rights reserved.</p>
+</footer>
+{% endblock %}

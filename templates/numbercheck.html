@@ -1,0 +1,31 @@
+{% load  static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Even or Odd Checker</title>
+</head>
+<body>
+    <h1>Even or Odd Checker</h1>
+    <form method="POST">
+
+        {% if error %}
+
+        <div class="alert alert-danger" role ="alert">
+            Please enter the value
+        </div>
+
+        {% endif %}
+
+        {% csrf_token %}
+        <label for="number"><b>Enter a number:</b></label>
+        <input type="text" id="number" name="number" required>
+        <button type="submit">Check</button>
+    </form>
+
+    {% if result %}
+        <h2>Result: {{ result }}</h2>
+    {% endif %}
+</body>
+</html>

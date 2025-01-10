@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ news.title }}</title>
+</head>
+<body>
+    <h1>{{ news.title }}</h1>
+    <p>{{ news.desc }}</p>
+    <p><small>Published on: {{ news.date }}</small></p>
+</body>
+
+{% extends 'base.html' %}
+
+{% block title %}{{ news.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ news.title }}</h1>
+<p>{{ news.content }}</p>
+<small>Published on: {{ news.published_date }}</small>
+<a href="{% url 'home' %}">Back to Home</a>
+{% endblock %}
+
+</html>

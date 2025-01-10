@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+<!-- header.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Site{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <!-- Header with fixed positioning -->
+    <header style="position: fixed; top: 0; width: 100%; background-color: red; color: #fff; padding: 10px; text-align: center;">
+        <h1>My Site</h1>
+        <nav>
+            <ul style="display: inline-block; padding: 0; list-style: none; margin: 0;">
+                <li style="display: inline; margin-right: 15px;">
+                    <a href="{% url 'index' %}" class="{% if request.path == '/' %}active{% endif %}" style="color: yellow;">Home</a>
+                </li>
+                <li style="display: inline; margin-right: 15px;">
+                    <a href="{% url 'aboutus' %}" class="{% if request.path == '/aboutus/' %}active{% endif %}" style="color: yellow;">About Us</a>
+                </li>
+                <li style="display: inline; margin-right: 15px;">
+                    <a href="{% url 'services' %}" class="{% if request.path == '/services/' %}active{% endif %}" style="color: yellow;">Services</a>
+                </li>
+                <li style="display: inline; margin-right: 15px;">
+                    <a href="{% url 'contact' %}" class="{% if request.path == '/contact/' %}active{% endif %}" style="color: yellow;">Contact</a>
+                </li>
+                <li style="display: inline; margin-right: 15px;">
+                    <a href="{% url 'course' %}" class="{% if request.path == '/course/' %}active{% endif %}" style="color: yellow;">Course</a>
+                </li>
+            </ul>
+        </nav>
+        
+    </header>
+
+    <!-- Push content down below the fixed header -->
+    <div style="padding-top: 60px;">
+        <!-- Main content will go here -->
